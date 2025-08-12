@@ -69,7 +69,9 @@ export const Home = () => {
 
             <div className="flex flex-wrap gap-4 mt-6 justify-center sm:justify-start">
               <a
-                href="#portfolio"
+                href="/files/curriculum_vitae.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex text-base sm:text-lg items-center gap-2 bg-emerald-600 text-white py-3 px-6 rounded-[16px] hover:bg-emerald-700 transition shadow-lg hover:shadow-emerald-500/20 w-[80%] sm:w-auto justify-center"
               >
                 Curriculum Vitae
@@ -81,7 +83,7 @@ export const Home = () => {
                 rel="noopener noreferrer"
                 className="inline-flex text-base sm:text-lg items-center gap-2 bg-white text-gray-800 py-3 px-6 rounded-[16px] hover:bg-gray-800 hover:text-white transition border border-gray-200 shadow-sm w-[80%] sm:w-auto justify-center"
               >
-                <FaWhatsapp size={20} className="text-emerald-600"/>
+                <FaWhatsapp size={20} className="text-emerald-600" />
                 Contact Me
               </a>
             </div>
