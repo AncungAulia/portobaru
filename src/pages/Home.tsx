@@ -3,6 +3,7 @@ import { Typewriter } from "react-simple-typewriter";
 import { CircleArrowDown } from "lucide-react";
 import Profil from "../assets/images/profil.jpg";
 import { FaWhatsapp } from "react-icons/fa";
+import CV from "../../public/file/curriculum_vitae.pdf";
 
 export const Home = () => {
   return (
@@ -69,9 +70,8 @@ export const Home = () => {
 
             <div className="flex flex-wrap gap-4 mt-6 justify-center sm:justify-start">
               <a
-                href="/files/curriculum_vitae.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={CV}
+                download="ancungaulia_cv.pdf"
                 className="inline-flex text-base sm:text-lg items-center gap-2 bg-emerald-600 text-white py-3 px-6 rounded-[16px] hover:bg-emerald-700 transition shadow-lg hover:shadow-emerald-500/20 w-[80%] sm:w-auto justify-center"
               >
                 Curriculum Vitae
