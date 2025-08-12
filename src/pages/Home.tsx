@@ -1,8 +1,8 @@
-
 import { Github, Linkedin, Mail, ExternalLink } from "lucide-react";
 import { Typewriter } from "react-simple-typewriter";
 import { CircleArrowDown } from "lucide-react";
 import Profil from "../assets/images/profil.jpg";
+import { FaWhatsapp } from "react-icons/fa";
 
 export const Home = () => {
   return (
@@ -50,7 +50,7 @@ export const Home = () => {
                 <Github size={20} />
               </a>
               <a
-                href="https://www.linkedin.com/in/aulia-nur-fajri-tri-anggoro-/"
+                href="https://www.linkedin.com/in/ancungaulia/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#0a66c2] hover:bg-[#0a66c2] border-1 border-gray-300 hover:text-white transition shadow-lg"
@@ -58,8 +58,10 @@ export const Home = () => {
                 <Linkedin size={20} />
               </a>
               <a
-                href="mailto:ancungaulia@gmail.com.com"
-                className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#08851b] hover:bg-[#08851b] border-1 border-gray-300 hover:text-white transition shadow-lg "
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=ancungaulia@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#08851b] hover:bg-[#08851b] border-1 border-gray-300 hover:text-white transition shadow-lg"
               >
                 <Mail size={20} />
               </a>
@@ -74,9 +76,12 @@ export const Home = () => {
                 <ExternalLink size={18} />
               </a>
               <a
-                href="#contact"
+                href="https://wa.me/6281310905172"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex text-base sm:text-lg items-center gap-2 bg-white text-gray-800 py-3 px-6 rounded-[16px] hover:bg-gray-800 hover:text-white transition border border-gray-200 shadow-sm w-[80%] sm:w-auto justify-center"
               >
+                <FaWhatsapp size={20} className="text-emerald-600"/>
                 Contact Me
               </a>
             </div>
