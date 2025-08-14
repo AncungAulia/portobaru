@@ -190,13 +190,13 @@ export const Projects = () => {
                       ))}
                     </div>
                   </div>
-                  <div className="flex gap-4 mt-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-4 w-full">
                     {project.githubLink !== "none" && (
                       <a
                         href={project.githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm text-gray-600 border-1 border-gray-300 p-2 rounded-[8px] hover:text-white hover:bg-gray-800 shadow-md transition-all"
+                        className="flex items-center justify-center bg-gray-700 sm:justify-start gap-1 text-sm text-white border-1 border-gray-300 p-2 rounded-[8px] hover:text-white hover:bg-gray-800 shadow-md transition-all"
                       >
                         <Github size={16} /> Source Code
                       </a>
@@ -206,7 +206,7 @@ export const Projects = () => {
                         href={project.liveLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm text-black p-2 rounded-[8px] bg-yellow-400 shadow-md hover:opacity-80 transition"
+                        className="flex items-center justify-center sm:justify-start gap-1 text-sm text-black p-2 rounded-[8px] bg-yellow-400 shadow-md hover:opacity-80 transition"
                       >
                         <ExternalLink size={16} /> Live Demo
                       </a>

@@ -78,25 +78,21 @@ export const Home = () => {
             </div>
 
             <div
-              className="flex flex-wrap gap-4 mt-6 justify-center sm:justify-start animate-fade-in"
+              className="
+    flex flex-wrap gap-4 mt-6 justify-center sm:justify-start animate-fade-in
+    absolute bottom-5 left-0 w-full px-4 sm:static sm:w-auto sm:px-0 sm:mt-6
+    bg-white sm:bg-transparent py-3 sm:py-0
+    border-t border-gray-200 sm:border-none
+  "
               style={{ animationDelay: "2.5s", animationFillMode: "backwards" }}
             >
               <a
                 href="/curriculum_vitae.pdf"
                 download="ancungaulia_cv.pdf"
-                className="inline-flex text-base sm:text-lg items-center gap-2 bg-emerald-600 text-white py-3 px-6 rounded-[16px] hover:bg-emerald-700 transition shadow-lg hover:shadow-emerald-500/20 w-[80%] sm:w-auto justify-center"
+                className="inline-flex w-[95%] sm:w-auto text-base sm:text-lg items-center gap-2 bg-emerald-600 text-white py-3 px-6 rounded-[16px] hover:bg-emerald-700 transition shadow-lg hover:shadow-emerald-500/20 justify-center"
               >
-                Curriculum Vitae
+                Download My CV
                 <ExternalLink size={18} />
-              </a>
-              <a
-                href="https://wa.me/6281310905172"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex text-base sm:text-lg items-center gap-2 bg-white text-gray-800 py-3 px-6 rounded-[16px] hover:bg-gray-800 hover:text-white transition border border-gray-200 shadow-sm w-[80%] sm:w-auto justify-center"
-              >
-                <FaWhatsapp size={20} className="text-emerald-600" />
-                Contact Me
               </a>
             </div>
           </div>
