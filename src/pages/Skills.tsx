@@ -338,28 +338,7 @@ const Skills = () => {
           <ChevronRight size={24} className="text-white" />
         </button>
       </div>
-      {/* Dots Indicator */}
-      <div
-        className={`flex justify-center gap-3 transition-all duration-300 items-center ${
-          animate ? "animate-fade-in opacity-100" : "opacity-0"
-        }`}
-        style={{
-          animationDelay: "0.5s",
-          animationFillMode: "backwards",
-        }}
-      >
-        {skillCards.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrentCard(idx)}
-            className={`rounded-full transition-all duration-300 ${
-              idx === currentCard
-                ? "bg-emerald-600 scale-125 w-4 h-1"
-                : "bg-gray-300 hover:bg-gray-400 w-3 h-3"
-            }`}
-          />
-        ))}
-      </div>
+      
 
       {/* Marquee */}
       <Marquees animate={animate} />
