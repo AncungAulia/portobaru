@@ -2,7 +2,6 @@ import { Github, Linkedin, Mail, ExternalLink } from "lucide-react";
 import { Typewriter } from "react-simple-typewriter";
 import { CircleArrowDown } from "lucide-react";
 import Profil from "../assets/images/profil.jpg";
-import { FaWhatsapp } from "react-icons/fa";
 
 export const Home = () => {
   return (
