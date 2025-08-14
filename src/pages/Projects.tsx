@@ -52,8 +52,32 @@ const projects = [
 
 export const Projects = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [animate, setAnimate] = useState(false);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  // Animation trigger
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          console.log("Projects section intersection:", entry.isIntersecting);
+          if (entry.isIntersecting) {
+            setAnimate(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % projects.length);
@@ -83,32 +107,51 @@ export const Projects = () => {
       nextSlide();
     }, 5000);
 
-    return () => clearInterval(interval); // clear ketika unmount atau slide berubah
+    return () => clearInterval(interval);
   }, [currentSlide]);
 
   return (
     <section
       id="projects"
+      ref={sectionRef} // TAMBAH REF INI!
       className="min-h-screen w-full flex flex-col items-center justify-center p-8 relative overflow-hidden bg-emerald-600"
     >
-      {/* To Top */}
-      <div className="hidden md:block absolute top-3 z-10 left-1/2 -translate-x-1/2">
-        <a
-          href="#home"
-          className="flex flex-col items-center gap-1 text-white hover:scale-110 hover:font-semibold transition-all duration-200"
+      <div className="hidden md:block absolute top-3 z-10 left-1/2 -translate-x-1/2 animate-bounce-up">
+        <button
+          onClick={() => {
+            document
+              .getElementById("home")
+              ?.scrollIntoView({ behavior: "smooth" });
+          }}
+          className="flex flex-col items-center gap-1 text-white hover:scale-110 hover:font-semibold transition-all duration-200 cursor-pointer"
         >
           <ArrowUpToLine size={18} />
           <p className="text-[10px]">To Top</p>
-        </a>
+        </button>
       </div>
 
-      <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+      {/* Heading */}
+      <h2
+        className={`text-3xl md:text-4xl font-bold text-white mb-8 transition-all duration-300 ${
+          animate ? "animate-fade-in opacity-100" : "opacity-0"
+        }`}
+        style={{
+          animationDelay: "0.1s",
+          animationFillMode: "backwards",
+        }}
+      >
         Projects
       </h2>
 
       {/* Carousel container */}
       <div
-        className="relative overflow-hidden w-full max-w-6xl"
+        className={`relative overflow-hidden w-full max-w-6xl transition-all duration-300 ${
+          animate ? "animate-fade-in opacity-100" : "opacity-0"
+        }`}
+        style={{
+          animationDelay: "0.3s",
+          animationFillMode: "backwards",
+        }}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
@@ -153,9 +196,9 @@ export const Projects = () => {
                         href={project.githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm text-gray-600 hover:text-black transition"
+                        className="flex items-center gap-1 text-sm text-gray-600 border-1 border-gray-300 p-2 rounded-[8px] hover:text-white hover:bg-gray-800 shadow-md transition-all"
                       >
-                        <Github size={16} /> GitHub
+                        <Github size={16} /> Source Code
                       </a>
                     )}
                     {project.liveLink !== "none" && (
@@ -163,7 +206,7 @@ export const Projects = () => {
                         href={project.liveLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm text-gray-600 hover:text-black transition"
+                        className="flex items-center gap-1 text-sm text-black p-2 rounded-[8px] bg-yellow-400 shadow-md hover:opacity-80 transition"
                       >
                         <ExternalLink size={16} /> Live Demo
                       </a>
@@ -190,21 +233,29 @@ export const Projects = () => {
         >
           <ChevronRight size={24} className="text-gray-600" />
         </button>
+      </div>
 
-        {/* Indicators */}
-        <div className="flex justify-center mt-6 gap-2 items-center">
-          {projects.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentSlide(idx)}
-              className={`rounded-full transition-all duration-300 ${
-                currentSlide === idx
-                  ? "bg-yellow-400 h-1 w-4"
-                  : "bg-white/50 hover:bg-white/80 w-3 h-3"
-              }`}
-            />
-          ))}
-        </div>
+      {/* Indicators */}
+      <div
+        className={`flex justify-center mt-6 gap-2 items-center transition-all duration-300 ${
+          animate ? "animate-fade-in opacity-100" : "opacity-0"
+        }`}
+        style={{
+          animationDelay: "0.5s",
+          animationFillMode: "backwards",
+        }}
+      >
+        {projects.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentSlide(idx)}
+            className={`rounded-full transition-all duration-300 ${
+              currentSlide === idx
+                ? "bg-yellow-400 h-1 w-4"
+                : "bg-white/50 hover:bg-white/80 w-3 h-3"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );

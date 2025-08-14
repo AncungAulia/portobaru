@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CircleArrowDown, ArrowUpToLine } from "lucide-react";
 
 export const About = () => {
@@ -28,16 +28,40 @@ export const About = () => {
   ];
 
   // Auto swipe settings
-  const autoSwipeDelay = 5000; // 5 detik (bisa diubah ke 30000 untuk 30 detik)
-  const resetInteractionDelay = 2000; // 2 detik setelah user stop interacting
+  const autoSwipeDelay = 5000;
+  const resetInteractionDelay = 2000;
 
-  // Auto swipe effect
+  // Animation state
+  const [animate, setAnimate] = useState(false);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  // Trigger animasi kalau section masuk ke viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          console.log("Section intersection:", entry.isIntersecting); // Debug log
+          if (entry.isIntersecting) {
+            setAnimate(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     if (isUserInteracting) return;
 
     const autoSlide = setInterval(() => {
       setCurrentSlide((prev) => {
-        // Kalo udah di slide terakhir, balik ke slide pertama
         if (prev >= aboutData.length - 1) {
           return 0;
         }
@@ -48,7 +72,6 @@ export const About = () => {
     return () => clearInterval(autoSlide);
   }, [aboutData.length, isUserInteracting]);
 
-  // Reset user interaction setelah beberapa detik
   useEffect(() => {
     if (!isUserInteracting) return;
 
@@ -59,7 +82,6 @@ export const About = () => {
     return () => clearTimeout(resetTimer);
   }, [isUserInteracting]);
 
-  // Minimum swipe distance untuk trigger slide
   const minSwipeDistance = 50;
 
   const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
@@ -86,12 +108,10 @@ export const About = () => {
       setCurrentSlide((prev) => prev - 1);
     }
 
-    // Reset touch states
     setTouchStart(null);
     setTouchEnd(null);
   };
 
-  // Manual dot navigation
   const goToSlide = (index: number) => {
     setIsUserInteracting(true);
     setCurrentSlide(index);
@@ -100,27 +120,49 @@ export const About = () => {
   return (
     <section
       id="about"
+      ref={sectionRef} // PENTING: Tambah ref di sini!
       data-theme="emerald"
-      className="min-h-screen flex flex-row items-center px-6 bg-emerald-600 relative overflow-hidden min-w-full justify-center "
+      className="min-h-screen flex flex-row items-center px-6 bg-emerald-600 relative overflow-hidden min-w-full justify-center"
     >
       <div className="hidden md:block absolute bottom-3 z-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <a
-          href="#skills"
-          className="flex flex-col items-center gap-1 text-white"
+        <button
+          onClick={() => {
+            document
+              .getElementById("skills")
+              ?.scrollIntoView({ behavior: "smooth" });
+          }}
+          className="flex flex-col items-center gap-1 text-white cursor-pointer"
         >
           <p className="text-[10px]">My Skills</p>
           <CircleArrowDown size={18} />
-        </a>
+        </button>
       </div>
+
       <div className="hidden md:block absolute top-3 z-10 left-1/2 -translate-x-1/2 animate-bounce-up">
-        <a href="#home" className="flex flex-col items-center gap-1 text-white hover:scale-110 hover:font-semibold transition-all duration-200">
+        <button
+          onClick={() => {
+            document
+              .getElementById("home")
+              ?.scrollIntoView({ behavior: "smooth" });
+          }}
+          className="flex flex-col items-center gap-1 text-white hover:scale-110 hover:font-semibold transition-all duration-200 cursor-pointer"
+        >
           <ArrowUpToLine size={18} />
           <p className="text-[10px]">To Top</p>
-        </a>
+        </button>
       </div>
+
       <div className="max-w-full sm:max-w-[80%] w-full flex flex-col md:flex-row items-center justify-between gap-20 sm:gap-40">
         {/* Mobile View - Auto Swipe Carousel */}
-        <div className="w-full mt-10 md:hidden">
+        <div
+          className={`w-full mt-10 md:hidden transition-all duration-300 ${
+            animate ? "animate-fade-in opacity-100" : "opacity-0"
+          }`}
+          style={{
+            animationDelay: "0.2s",
+            animationFillMode: "backwards",
+          }}
+        >
           <div
             className="relative overflow-hidden cursor-grab active:cursor-grabbing"
             onTouchStart={onTouchStart}
@@ -148,7 +190,15 @@ export const About = () => {
           </div>
 
           {/* Dots Indicator with Progress Ring */}
-          <div className="flex justify-center mt-8 gap-3">
+          <div
+            className={`flex justify-center mt-8 gap-3 transition-all duration-300 ${
+              animate ? "animate-fade-in opacity-100" : "opacity-0"
+            }`}
+            style={{
+              animationDelay: "0.4s",
+              animationFillMode: "backwards",
+            }}
+          >
             {aboutData.map((_, idx) => (
               <button
                 key={idx}
@@ -162,7 +212,6 @@ export const About = () => {
                       : "bg-white/30 hover:bg-white/50"
                   }`}
                 />
-                {/* Progress ring untuk slide aktif */}
                 {idx === currentSlide && !isUserInteracting && (
                   <div className="absolute inset-0 w-3 h-3 rounded-full border-2 border-yellow-400/30">
                     <div
@@ -180,7 +229,15 @@ export const About = () => {
         </div>
 
         {/* Desktop View - Normal Layout */}
-        <div className="hidden md:flex flex-col gap-12">
+        <div
+          className={`hidden md:flex flex-col gap-12 transition-all duration-300 ${
+            animate ? "animate-fade-in opacity-100" : "opacity-0"
+          }`}
+          style={{
+            animationDelay: "0.3s", // Lebih lama supaya keliatan
+            animationFillMode: "backwards",
+          }}
+        >
           {aboutData.map((item, idx) => (
             <div
               key={idx}
@@ -196,9 +253,17 @@ export const About = () => {
         </div>
 
         {/* Vertical Progress With Nodes */}
-        <div className="flex items-center justify-center pb-10 sm:pb-0">
+        <div
+          className={`flex items-center justify-center pb-10 sm:pb-0 transition-all duration-300 ${
+            animate ? "animate-fade-in opacity-100" : "opacity-0"
+          }`}
+          style={{
+            animationDelay: "0.5s", // Timeline muncul belakangan
+            animationFillMode: "backwards",
+          }}
+        >
           <div className="relative flex flex-col justify-center gap-15">
-            {/* Vertical line - positioned relative to nodes */}
+            {/* Vertical line */}
             <div className="absolute left-[22.5px] h-[90%] md:h-[86%] top-0 bottom-0 w-1 bg-white/40" />
 
             {/* Timeline items */}
@@ -221,10 +286,7 @@ export const About = () => {
               },
             ].map((item, index) => (
               <div key={index} className="relative flex items-start group">
-                {/* Node bulat - positioned at left edge */}
                 <div className="relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-yellow-400 border-4 border-white shadow-lg shadow-yellow-400/50 group-hover:scale-110 transition-transform flex-shrink-0"></div>
-
-                {/* Konten */}
                 <div className="ml-8">
                   <h3 className="text-lg font-semibold text-yellow-300 group-hover:text-yellow-400 transition-colors">
                     {item.year}

@@ -3,7 +3,6 @@ import { Typewriter } from "react-simple-typewriter";
 import { CircleArrowDown } from "lucide-react";
 import Profil from "../assets/images/profil.jpg";
 import { FaWhatsapp } from "react-icons/fa";
-import CV from "../../public/file/curriculum_vitae.pdf";
 
 export const Home = () => {
   return (
@@ -13,11 +12,18 @@ export const Home = () => {
         id="home"
         className="min-h-screen w-full flex flex-col items-center justify-center p-8 relative overflow-hidden"
       >
-        <div className="hidden md:block absolute bottom-3 z-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <a href="#about" className="flex flex-col items-center gap-1">
+        <div className="hidden md:block absolute bottom-3 z-10 left-1/2 -translate-x-1/2 animate-bounce ">
+          <button
+            onClick={() => {
+              document
+                .getElementById("about")
+                ?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="flex flex-col items-center gap-1 text-gray-800 cursor-pointer"
+          >
             <p className="text-[10px]">About Me</p>
             <CircleArrowDown size={18} />
-          </a>
+          </button>
         </div>
         <div className="max-w-6xl w-full flex flex-col-reverse md:flex-row items-center justify-between gap-12">
           <div className="flex flex-col lg:items-start items-center space-y-4">
@@ -41,12 +47,15 @@ export const Home = () => {
               </span>
             </div>
 
-            <div className="flex w-full gap-10 sm:gap-4 mt-2 items-center justify-center sm:justify-start">
+            <div
+              className="flex w-full gap-10 sm:gap-4 mt-2 items-center justify-center sm:justify-start animate-fade-in"
+              style={{ animationDelay: "2.0s", animationFillMode: "backwards" }}
+            >
               <a
                 href="https://github.com/AncungAulia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-14 h-14 flex items-center justify-center rounded-full bg-white border-1 border-gray-300 text-[#24292e] hover:bg-[#24292e] hover:text-white transition shadow-sm"
+                className="w-14 h-14 flex items-center justify-center rounded-full bg-white border-1 border-gray-300 text-[#24292e] hover:bg-[#24292e] hover:text-white transition shadow-md"
               >
                 <Github size={20} />
               </a>
@@ -54,7 +63,7 @@ export const Home = () => {
                 href="https://www.linkedin.com/in/ancungaulia/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#0a66c2] hover:bg-[#0a66c2] border-1 border-gray-300 hover:text-white transition shadow-lg"
+                className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#0a66c2] hover:bg-[#0a66c2] border-1 border-gray-300 hover:text-white transition shadow-md"
               >
                 <Linkedin size={20} />
               </a>
@@ -62,15 +71,18 @@ export const Home = () => {
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=ancungaulia@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#08851b] hover:bg-[#08851b] border-1 border-gray-300 hover:text-white transition shadow-lg"
+                className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#08851b] hover:bg-[#08851b] border-1 border-gray-300 hover:text-white transition shadow-md"
               >
                 <Mail size={20} />
               </a>
             </div>
 
-            <div className="flex flex-wrap gap-4 mt-6 justify-center sm:justify-start">
+            <div
+              className="flex flex-wrap gap-4 mt-6 justify-center sm:justify-start animate-fade-in"
+              style={{ animationDelay: "2.5s", animationFillMode: "backwards" }}
+            >
               <a
-                href={CV}
+                href="/curriculum_vitae.pdf"
                 download="ancungaulia_cv.pdf"
                 className="inline-flex text-base sm:text-lg items-center gap-2 bg-emerald-600 text-white py-3 px-6 rounded-[16px] hover:bg-emerald-700 transition shadow-lg hover:shadow-emerald-500/20 w-[80%] sm:w-auto justify-center"
               >
@@ -89,7 +101,7 @@ export const Home = () => {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative ">
             <div className="absolute inset-0 bg-emerald-400 rounded-full blur-3xl opacity-20 scale-110"></div>
             <div className="relative flex items-center justify-center">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 blur-xl opacity-30 animate-pulse"></div>
