@@ -59,13 +59,14 @@ export const Home = () => {
                 <Github size={20} />
               </a>
               <a
-                href="www.linkedin.com/in/aulianurfajri"
+                href="https://www.linkedin.com/in/aulianurfajri"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#0a66c2] hover:bg-[#0a66c2] border-1 border-gray-300 hover:text-white transition shadow-md"
+                className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#0a66c2] hover:bg-[#0a66c2] border border-gray-300 hover:text-white transition shadow-md"
               >
                 <Linkedin size={20} />
               </a>
+
               <a
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=ancungaulia@gmail.com"
                 target="_blank"
