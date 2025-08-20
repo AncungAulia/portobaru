@@ -59,7 +59,7 @@ export const Home = () => {
                 <Github size={20} />
               </a>
               <a
-                href="https://www.linkedin.com/in/ancungaulia/"
+                href="www.linkedin.com/in/aulianurfajri"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#0a66c2] hover:bg-[#0a66c2] border-1 border-gray-300 hover:text-white transition shadow-md"
